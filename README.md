@@ -1,4 +1,4 @@
-# C/C++ Snippets Plus
+# C/C++ Snippets Extension
 
 该扩展为&ensp;Visual&ensp;Studio&ensp;Code&ensp;添加了&ensp;C/C++&ensp;的代码片段。
 

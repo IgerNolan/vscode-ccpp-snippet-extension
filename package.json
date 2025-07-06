@@ -1,35 +1,35 @@
 {
-    "name": "CCppSnippetExtension",
+    "name": "CppSnippetExtension",
     "publisher": "IgerNolan",
     "displayName": "C/C++ Snippet Extension",
     "description": "Code snippets for C/C++",
     "version": "1.0.0",
     "engines": {
-        "vscode": "^0.10.1"
+        "vscode": "^0.10.1",
     },
     "categories": [
-        "Snippets"
+        "Snippets",
     ],
     "contributes": {
         "snippets": [
             {
                 "language": "c",
-                "path": "./snippet/C.json"
+                "path": "./snippet/C.json",
             },
             {
                 "language": "cpp",
-                "path": "./snippet/Cpp.json"
+                "path": "./snippet/Cpp.json",
             }
         ]
     },
     "galleryBanner": {
         "color": "#E6E0EA",
-        "theme": "light"
+        "theme": "light",
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/IgerNolan/vscode-ccpp-snippet-extension"
+        "url": "https://github.com/IgerNolan/vscode-ccpp-snippet-extension",
     },
     "icon": "image/Cpp.png",
-    "license": "Check in License in the root folder"
+    "license": "Check in License in the root folder",
 }
