@@ -14,11 +14,11 @@
         "snippets": [
             {
                 "language": "c",
-                "path": "./snippets/c.json"
+                "path": "./snippet/C.json"
             },
             {
                 "language": "cpp",
-                "path": "./snippets/cpp.json"
+                "path": "./snippet/Cpp.json"
             }
         ]
     },
@@ -30,6 +30,6 @@
         "type": "git",
         "url": "https://github.com/IgerNolan/vscode-ccpp-snippet-extension"
     },
-    "icon": "img/Cpp.png",
+    "icon": "image/Cpp.png",
     "license": "Check in License in the root folder"
 }
