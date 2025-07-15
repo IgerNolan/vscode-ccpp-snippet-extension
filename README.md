@@ -1,4 +1,6 @@
-# C/C++ Snippets Extension
+# C/C++ Snippet Extension
+
+v1.0.1
 
 该扩展为&ensp;Visual&ensp;Studio&ensp;Code&ensp;添加了&ensp;C/C++&ensp;的代码片段。
 
@@ -24,10 +26,34 @@ Alternatively, one can also just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> (works
 
 The latest comment code snippets have been added:
 
+增加了额外的列提示，这样你就知道你的代码的复杂度了（推荐与Better&ensp;Comment&ensp;一起使用）
+Added extra column hints so you can be aware of your code complexity (recommended to use with Better Comment)
+
 ```cpp
 //struct // 创建一个结构体切分注释 // Creates a structure split comment
 
-/* struct ----------------------------------------------------------------------------------------------------------- */
+/* struct ----------------------------------------------------------------- 80 // ! ----------------------------- 120 */
+
+// 注释缩进 4 个空格的位置 // comment indent 4 space
+//4
+/**/
+
+// 注释缩进 8 个空格的位置 // comment indent 8 space
+//8
+/* 08 */
+
+// 注释缩进 12 个空格的位置 // comment indent 12 space
+//2
+/* - 12 - */
+
+// 注释缩进 16 个空格的位置 // comment indent 16 space
+//6
+/* --- 16 --- */
+
+// 注释缩进 20 个空格的位置 // comment indent 20 space
+//0
+/* ----- 20 ----- */
+
 ```
 
 ## 安装 Installation
