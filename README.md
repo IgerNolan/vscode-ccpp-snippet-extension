@@ -1,6 +1,6 @@
 # C/C++ Snippet Extension
 
-v1.1.1
+v1.1.2
 
 该扩展为&ensp;Visual&ensp;Studio&ensp;Code&ensp;添加了&ensp;C/C++&ensp;的代码片段。
 
@@ -15,7 +15,6 @@ Type a part of the keywords in snippet e.g., "for" and press enter or tab.
 ```cpp
 for // 创建一个 for 循环片段 // Creates a for loop snippet
 ```
-
 
 ## 更新 Update
 
@@ -40,29 +39,31 @@ The latest comment code snippets have been added:
 Added extra column hints so you can be aware of your code complexity (recommended to use with Better Comment)
 
 ```cpp
-//struct // 创建一个结构体切分注释 // Creates a structure split comment
+// 创建一个结构体切分注释 // Creates a structure split comment
+//struct
+// -> struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |
 
-/* struct ----------------------------------------------------------------- 80 // ! ----------------------------- 120 */
+// <- struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |
 
 // 注释缩进 4 个空格的位置 // comment indent 4 space
 //4
-/**/
+// |
 
 // 注释缩进 8 个空格的位置 // comment indent 8 space
 //8
-/* 08 */
+// - 8 |
 
 // 注释缩进 12 个空格的位置 // comment indent 12 space
-//2
-/* - 12 - */
+//12
+// ---- 12 |
 
 // 注释缩进 16 个空格的位置 // comment indent 16 space
-//6
-/* --- 16 --- */
+//16
+// -------- 16 |
 
 // 注释缩进 20 个空格的位置 // comment indent 20 space
-//0
-/* ----- 20 ----- */
+//20
+// ------------ 20 |
 
 ```
 
@@ -71,23 +72,18 @@ Added extra column hints so you can be aware of your code complexity (recommende
 1. 安装&ensp;Visual&ensp;Studio&ensp;Code&ensp;0.10.1&ensp;或更高版本；
 
    Install Visual Studio Code 0.10.1 or higher
-
 2. 运行&ensp;VS&ensp;Code；
 
    Launch VS Code
-
 3. 输入&ensp;`Ctrl`+`Shift`+`P`&ensp;(Windows,&ensp;Linux)&ensp;或&ensp;`Cmd`+`Shift`+`P`&ensp;(OSX)；
 
    From the command palette `Ctrl`+`Shift`+`P` (Windows, Linux) or `Cmd`+`Shift`+`P` (OSX)
-
 4. 输入&ensp;`ext install`&ensp;或者直接选择&ensp;`Install Extension`；
 
    Type `ext install` or just simply select `Install Extension`
-
 5. 选择拓展&ensp;-&ensp;Cpp&ensp;Snippets&ensp;Plus；
 
    Choose the extension - Cpp Snippets Plus
-
 6. 重启&ensp;VS&ensp;Code。
 
    Relaunch VS Code
