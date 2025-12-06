@@ -1,379 +1,343 @@
 {
+	"#if": {
+		"prefix": "#if",
+		"body": [
+			"\n#ifdef ${1}",
+			"    $2",
+			"#endif // $1\n"
+		],
+		"description": "Code snippet for '#if'"
+	},
+	"#ifn": {
+		"prefix": "#ifn",
+		"body": [
+			"\n#ifndef ${1}",
+			"    $2",
+			"#endif // $1\n"
+		],
+		"description": "Code snippet for '#ifndef'"
+	},
+	"#inc<": {
+		"prefix": "#inc<",
+		"body": [
+			"\n#include <$1>\n"
+		],
+		"description": "Code snippet for '#include <>'"
+	},
+	"#inc": {
+		"prefix": "#inc",
+		"body": [
+			"\n#include \"$1\"\n"
+		],
+		"description": "Code snippet for '#include \"\"'"
+	},
+	"#def": {
+		"prefix": "#def",
+		"body": [
+			"\n#define ($1) ($2)\n"
+		],
+		"description": "Code snippet for '#define'"
+	},
+	"enum": {
+		"prefix": "enum",
+		"body": [
+			"\nenum ${EnumName}Enum {",
+			"    $1",
+			"}; // <- enum ${EnumName}Enum\n"
+		],
+		"description": "Code snippet for 'enum'"
+	},
+	"enum class": {
+		"prefix": "enum class",
+		"body": [
+			"\nenum class ${EnumClassName}Enum {",
+			"    $1",
+			"}; // <- enum class ${EnumClassName}Enum\n"
+		],
+		"description": "Code snippet for 'enum class'(>= c++11)"
+	},
+	"struct": {
+		"prefix": "struct",
+		"body": [
+			"\nstruct ${StructName} {",
+			"    $1",
+			"}; // <- struct ${StructName}\n"
+		],
+		"description": "Code snippet for 'struct'"
+	},
+	"union": {
+		"prefix": "union",
+		"body": [
+			"\nunion ${UnionName} {",
+			"    $1",
+			"}; // <- union ${UnionName}\n"
+		],
+		"description": "Code snippet for 'union'"
+	},
+	"class": {
+		"prefix": "class",
+		"body": [
+			"\nclass ${ClassName} {",
+			"    public:",
+			"        ${ClassName}() = default;",
+			"        ${ClassName}(${ClassName} &&) = default;",
+			"        ${ClassName}(const ${ClassName} &) = default;",
+			"        ${ClassName} &operator=(${ClassName} &&) = default;",
+			"        ${ClassName} &operator=(const ${ClassName} &) = default;",
+			"        ~${ClassName}() = default;",
+			"",
+			"    protected:",
+			"        $1",
+			"",
+			"    private:",
+			"        $2",
+			"}; // <- class ${ClassName}\n"
+		],
+		"description": "Code snippet for 'class'"
+	},
+	"namespace": {
+		"prefix": "namespace",
+		"body": [
+			"\nnamespace ${NamespaceName} {",
+			"    $1",
+			"} // <- namespace ${NamespaceName}\n"
+		],
+		"description": "Code snippet for 'namespace'"
+	},
+	"try": {
+		"prefix": "try",
+		"body": [
+			"\ntry {",
+			"    $1",
+			"} catch (const std::exception&) {",
+			"    $2",
+			"} // <- try_catch $3\n"
+		],
+		"description": "Code snippet for try catch"
+	},
+	"if": {
+		"prefix": "if",
+		"body": [
+			"\nif ($1) {",
+			"    $2",
+			"} // <- if $3\n"
+		],
+		"description": "Code snippet for 'if' statement"
+	},
+	"else": {
+		"prefix": "else",
+		"body": [
+			"\nelse {",
+			"    $1",
+			"} // <- else $2\n"
+		],
+		"description": "Code snippet for 'else' statement"
+	},
+	"elif": {
+		"prefix": "elif",
+		"body": [
+			"\nelse if ($1) {",
+			"    $2",
+			"} // <- elif $3\n"
+		],
+		"description": "Code snippet for 'elif' statement"
+	},
+	"switch": {
+		"prefix": "switch",
+		"body": [
+			"\nswitch (${switch_on}) {",
+			"    case ${case_1}:",
+			"        $1",
+			"        break;",
+			"    default:",
+			"        $2",
+			"        break;",
+			"} // <- switch $3\n"
+		],
+		"description": "Code snippet for 'switch' statement"
+	},
+	"while": {
+		"prefix": "while",
+		"body": [
+			"\nwhile ($1) {",
+			"    $2",
+			"} // <- while $3\n"
+		],
+		"description": "Code snippet for 'while' loop"
+	},
+	"do": {
+		"prefix": "do",
+		"body": [
+			"\ndo {",
+			"    $1",
+			"} while ($2); // <- do $3\n"
+		],
+		"description": "Code snippet for 'do_while' loop"
+	},
 	"for": {
 		"prefix": "for",
 		"body": [
-			"for (${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++)",
-			"{",
-			"	$3",
-			"}"
+			"\nfor (${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++) {",
+			"    $3",
+			"} // <- for $4\n"
 		],
 		"description": "Code snippet for 'for' loop"
 	},
 	"forr": {
 		"prefix": "forr",
 		"body": [
-			"for (int ${i} = ${1:length} - 1; ${i} >= ${2:0}; ${i}--)",
-			"{",
-			"	$3",
-			"}"
+			"\nfor (int ${i} = ${1:length} - 1; ${i} >= ${2:0}; ${i}--) {",
+			"    $3",
+			"} // <- for $4\n"
 		],
 		"description": "Code snippet for reverse 'for' loop"
-	},
-	"do": {
-		"prefix": "do",
-		"body": [
-			"do",
-			"{",
-			"	$1",
-			"} while($2);"
-		],
-		"description": "Code snippet for do...while loop"
-	},
-	"while": {
-		"prefix": "while",
-		"body": [
-			"while ($1)",
-			"{",
-			"	$2",
-			"}"
-		],
-		"description": "Code snippet for while loop"
 	},
 	"foreach": {
 		"prefix": "foreach",
 		"body": [
-			"for(auto ${var} : ${collection_to_loop})",
-			"{",
-			"	$1",
-			"}"
+			"\nfor(auto ${var} : ${collection_to_loop}) {",
+			"    $1",
+			"} // <- foreach $2\n"
 		],
 		"description": "Code snippet for range-based for loop (c++11) statement"
-	},
-	"if": {
-		"prefix": "if",
-		"body": [
-			"if ($1)",
-			"{",
-			"	$2",
-			"}"
-		],
-		"description": "Code snippet for if statement"
-	},
-	"else": {
-		"prefix": "else",
-		"body": [
-			"else",
-			"{",
-			"	$1",
-			"}"
-		],
-		"description": "Code snippet for else statement"
-	},
-	"else if": {
-		"prefix": "else if",
-		"body": [
-			"else if ($1)",
-			"{",
-			"	$2",
-			"}"
-		],
-		"description": "Code snippet for else-if statement"
-	},
-	"enum": {
-		"prefix": "enum",
-		"body": [
-			"enum ${MyEnum}",
-			"{",
-			"	$1",
-			"};"
-		],
-		"description": "Code snippet for enum"
-	},
-	"enum class": {
-		"prefix": "enum class",
-		"body": [
-			"enum class ${MyClass} { };"
-		],
-		"description": "Code snippet for enum class (c++11)"
-	},
-	"class": {
-		"prefix": "class",
-		"body": [
-			"class ${MyClass}",
-			"{",
-			"public:",
-			"	${MyClass}();",
-			"	${MyClass}(${MyClass} &&) = default;",
-			"	${MyClass}(const ${MyClass} &) = default;",
-			"	${MyClass} &operator=(${MyClass} &&) = default;",
-			"	${MyClass} &operator=(const ${MyClass} &) = default;",
-			"	~${MyClass}();",
-			"",
-			"private:",
-			"	$1",
-			"};",
-			"",
-			"${MyClass}::${MyClass}()",
-			"{",
-			"}",
-			"",
-			"${MyClass}::~${MyClass}()",
-			"{",
-			"}"
-		],
-		"description": "Code snippet for class"
-	},
-	"classi": {
-		"prefix": "classi",
-		"body": [
-			"class ${MyClass}",
-			"{",
-			"public:",
-			"	${MyClass}() = default;",
-			"	${MyClass}(${MyClass} &&) = default;",
-			"	${MyClass}(const ${MyClass} &) = default;",
-			"	${MyClass} &operator=(${MyClass} &&) = default;",
-			"	${MyClass} &operator=(const ${MyClass} &) = default;",
-			"	~${MyClass}() = default;",
-			"",
-			"private:",
-			"	$1",
-			"};"
-		],
-		"description": "Code snippet for class with inline constructor/destructor"
-	},
-	"interface": {
-		"prefix": "interface",
-		"body": [
-			"__interface I${Interface}",
-			"{",
-			"	$1",
-			"};"
-		],
-		"description": "Code snippet for interface (Visual C++)"
-	},
-	"namespace": {
-		"prefix": "namespace",
-		"body": [
-			"namespace ${MyNamespace}",
-			"{",
-			"	$1",
-			"}"
-		],
-		"description": "Code snippet for namespace"
-	},
-	"#ifdef": {
-		"prefix": "#ifdef",
-		"body": [
-			"#ifdef ${DEBUG}",
-			"$1",
-			"#endif // ${DEBUG}"
-		],
-		"description": "Code snippet for #ifdef"
-	},
-	"#ifndef": {
-		"prefix": "#ifndef",
-		"body": [
-			"#ifndef ${1:1}",
-			"$2",
-			"#endif // !$1"
-		],
-		"description": "Code snippet for #ifndef"
-	},
-	"#if": {
-		"prefix": "#if",
-		"body": [
-			"#ifdef ${1:0}",
-			"$2",
-			"#endif // $1"
-		],
-		"description": "Code snippet for #if"
-	},
-	"struct": {
-		"prefix": "struct",
-		"body": [
-			"struct ${MyStruct}",
-			"{",
-			"	$1",
-			"};"
-		],
-		"description": "Code snippet for struct"
-	},
-	"switch": {
-		"prefix": "switch",
-		"body": [
-			"switch (${switch_on})",
-			"{",
-			"default:",
-			"	break;$1",
-			"}"
-		],
-		"description": "Code snippet for switch statement"
-	},
-	"try": {
-		"prefix": "try",
-		"body": [
-			"try",
-			"{",
-			"	",
-			"}",
-			"catch (const std::exception&)",
-			"{",
-			"	$1",
-			"}"
-		],
-		"description": "Code snippet for try catch"
-	},
-	"union": {
-		"prefix": "union",
-		"body": [
-			"union ${MyUnion}",
-			"{",
-			"	$1",
-			"};"
-		],
-		"description": "Code snippet for union"
-	},
-	"cout": {
-		"prefix": "cout",
-		"body": [
-			"std::cout << \"${1:/* message */}\" << std::endl;"
-		],
-		"description": "Code snippet for printing to std::cout, provided the header is set"
-	},
-	"#inc": {
-		"prefix": "#inc",
-		"body": [
-			"#include \"$1\""
-		],
-		"description": "Code snippet for #include \" \""
-	},
-	"#inc<": {
-		"prefix": "#inc<",
-		"body": [
-			"#include <$1>"
-		],
-		"description": "Code snippet for #include \" \""
-	},
-	"#def": {
-		"prefix": "#def",
-		"body": [
-			"#define \"$1\" \"$2\" "
-		],
-		"description": "Code snippet for #define \" \""
-	},
-	"main": {
-		"prefix": "main",
-		"body": [
-			"int main(int argc, const char** argv) {",
-			"    return 0;",
-			"}"
-		],
-		"description": "Code snippet for main function"
 	},
 	"//guard": {
 		"prefix": "//guard",
 		"body": [
-			"\n/* guard ------------------------------------------------------------------ 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> guard --------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- guard --------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//guard"
 	},
 	"//include": {
 		"prefix": "//include",
 		"body": [
-			"\n/* include ---------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> include ------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"/**//* -> header ---------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/**//* <- header ---------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"/**//* -> standard_C ------------------------------------------------------ 80 // ! ----------------------------- 120 */",
+			"",
+			"/**//* <- standard_C ------------------------------------------------------ 80 // ! ----------------------------- 120 */",
+			"/**//* -> standard_C++ ---------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/**//* <- standard_C++ ---------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"/**//* -> third ----------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/**//* <- third ----------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"/**//* -> project --------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/**//* <- project --------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"/* <- include ------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//include"
 	},
 	"//macro": {
 		"prefix": "//macro",
 		"body": [
-			"\n/* macro ------------------------------------------------------------------ 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> macro --------------------------------------------------------------- 80 // ! ------------------------------ 120 */",
+			"",
+			"/* <- macro --------------------------------------------------------------- 80 // ! ------------------------------ 120 */\n"
 		],
 		"description": "//macro"
-	},
-	"//namespace": {
-		"prefix": "//namespace",
-		"body": [
-			"\n/* namespace -------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
-		],
-		"description": "//namespace"
 	},
 	"//typedef": {
 		"prefix": "//typedef",
 		"body": [
-			"\n/* typedef ---------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> typedef ------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- typedef ------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//typedef"
 	},
-	"//struct": {
-		"prefix": "//struct",
+	"//namespace": {
+		"prefix": "//namespace",
 		"body": [
-			"\n/* struct ----------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> namespace ----------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- namespace ----------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
-		"description": "//struct"
+		"description": "//namespace"
 	},
 	"//class": {
 		"prefix": "//class",
 		"body": [
-			"\n/* class ------------------------------------------------------------------ 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> class --------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- class --------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//class"
+	},
+	"//struct": {
+		"prefix": "//struct",
+		"body": [
+			"\n/* -> struct -------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- struct -------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
+		],
+		"description": "//struct"
 	},
 	"//enum": {
 		"prefix": "//enum",
 		"body": [
-			"\n/* enum ------------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> enum ---------------------------------------------------------------- 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- enum ---------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//enum"
 	},
 	"//variable": {
 		"prefix": "//variable",
 		"body": [
-			"\n/* variable --------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> variable ------------------------------------------------------------ 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- variable ------------------------------------------------------------ 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//variable"
 	},
 	"//function": {
 		"prefix": "//function",
 		"body": [
-			"\n/* function --------------------------------------------------------------- 80 // ! ----------------------------- 120 */\n",
+			"\n/* -> function ------------------------------------------------------------ 80 // ! ----------------------------- 120 */",
+			"",
+			"/* <- function ------------------------------------------------------------ 80 // ! ----------------------------- 120 */\n"
 		],
 		"description": "//function"
 	},
 	"//indent4": {
 		"prefix": "//4",
 		"body": [
-			"/**/",
+			"/**/"
 		],
 		"description": "comment indent 4 space"
 	},
 	"//indent8": {
 		"prefix": "//8",
 		"body": [
-			"/* 08 */",
+			"/* 08 */"
 		],
 		"description": "comment indent 8 space"
 	},
 	"//indent12": {
 		"prefix": "//2",
 		"body": [
-			"/* - 12 - */",
+			"/* - 12 - */"
 		],
 		"description": "comment indent 12 space"
 	},
 	"//indent16": {
 		"prefix": "//6",
 		"body": [
-			"/* --- 16 --- */",
+			"/* --- 16 --- */"
 		],
 		"description": "comment indent 16 space"
 	},
 	"//indent20": {
 		"prefix": "//0",
 		"body": [
-			"/* ----- 20 ----- */",
+			"/* ----- 20 ----- */"
 		],
 		"description": "comment indent 20 space"
-	},
+	}
 }

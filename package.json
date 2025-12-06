@@ -3,7 +3,7 @@
     "publisher": "IgerNolan",
     "displayName": "C/C++ Snippet Extension",
     "description": "Code snippets for C/C++",
-    "version": "1.0.2",
+    "version": "1.1.1",
     "engines": {
         "vscode": "^0.10.1"
     },
