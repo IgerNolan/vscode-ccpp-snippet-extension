@@ -2,13 +2,17 @@
     "name": "CppSnippetExtension",
     "publisher": "IgerNolan",
     "displayName": "C/C++ Snippet Extension",
-    "description": "Code snippets for C/C++",
-    "version": "1.1.2",
+    "description": "Code snippets for C/C++ with Region Fold support",
+    "version": "2.0.0",
     "engines": {
-        "vscode": "^0.10.1"
+        "vscode": "^1.50.0"
     },
     "categories": [
         "Snippets"
+    ],
+    "activationEvents": [
+        "onLanguage:c",
+        "onLanguage:cpp"
     ],
     "contributes": {
         "snippets": [
@@ -24,30 +28,23 @@
         "configuration": {
             "title": "C/C++ Snippet Extension Settings",
             "properties": {
-                "files.encoding": {
+                "regionFold.markerColor": {
                     "type": "string",
-                    "default": "utf8",
-                    "description": "文件编码设置"
-                },
-                "files.eol": {
-                    "type": "string",
-                    "default": "\\n",
-                    "description": "文件换行符设置"
-                },
-                "editor.rulers": {
-                    "type": "array",
-                    "default": [
-                        80,
-                        120
-                    ],
-                    "description": "编辑器标尺位置设置",
-                    "items": {
-                        "type": "number"
-                    }
+                    "default": "green",
+                    "description": "Region marker line color"
                 }
             }
         }
     },
+    "extensionDependencies": [
+        "HO-COOH.include-info",
+        "aaron-bond.better-comments",
+        "MohammadBaqer.better-folding",
+        "wraith13.bracket-lens",
+        "oderwat.indent-rainbow",
+        "SirTori.indenticator",
+        "cliffordfajardo.highlight-line-vscode"
+    ],
     "galleryBanner": {
         "color": "#E6E0EA",
         "theme": "light"
@@ -57,5 +54,16 @@
         "url": "https://github.com/IgerNolan/vscode-ccpp-snippet-extension"
     },
     "icon": "image/Cpp.png",
-    "license": "Check in License in the root folder"
+    "license": "Check in License in the root folder",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.6",
+        "@types/vscode": "^1.50.0",
+        "typescript": "^4.9.5"
+    },
+    "main": "./out/extension.js"
 }

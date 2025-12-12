@@ -41,66 +41,144 @@
 	"enum": {
 		"prefix": "enum",
 		"body": [
-			"\nenum ${EnumName}Enum {",
-			"    $1",
-			"}; // <- enum ${EnumName}Enum\n"
+			"\n#pragma region enum",
+			"enum ${1:EnumName}Enum {",
+			"    $2",
+			"}; // enum ${1}Enum",
+			"#pragma endregion enum\n"
 		],
 		"description": "Code snippet for 'enum'"
 	},
 	"enum class": {
 		"prefix": "enum class",
 		"body": [
-			"\nenum class ${EnumClassName}Enum {",
-			"    $1",
-			"}; // <- enum class ${EnumClassName}Enum\n"
+			"\n#pragma region enum",
+			"enum class ${1:EnumClassName}Enum {",
+			"    $2",
+			"}; // enum class ${1}Enum",
+			"#pragma endregion enum\n"
 		],
 		"description": "Code snippet for 'enum class'(>= c++11)"
 	},
 	"struct": {
 		"prefix": "struct",
 		"body": [
-			"\nstruct ${StructName} {",
-			"    $1",
-			"}; // <- struct ${StructName}\n"
+			"\n#pragma region struct",
+			"struct ${1:StructName} {",
+			"    $2",
+			"}; // struct ${1}",
+			"#pragma endregion struct\n"
 		],
 		"description": "Code snippet for 'struct'"
 	},
 	"union": {
 		"prefix": "union",
 		"body": [
-			"\nunion ${UnionName} {",
-			"    $1",
-			"}; // <- union ${UnionName}\n"
+			"\n#pragma region union",
+			"union ${1:UnionName} {",
+			"    $2",
+			"}; // union ${1}",
+			"#pragma endregion union\n"
 		],
 		"description": "Code snippet for 'union'"
 	},
 	"class": {
 		"prefix": "class",
 		"body": [
-			"\nclass ${ClassName} {",
+			"\n#pragma region class",
+			"// || -> enum --------------------- 40 || ? ------------------------------- 80 || ! ------------------------------ 120 |",
+			"class ${1:ClassName} {",
+			"    #pragma region class::enum",
 			"    public:",
-			"        ${ClassName}() = default;",
-			"        ${ClassName}(${ClassName} &&) = default;",
-			"        ${ClassName}(const ${ClassName} &) = default;",
-			"        ${ClassName} &operator=(${ClassName} &&) = default;",
-			"        ${ClassName} &operator=(const ${ClassName} &) = default;",
-			"        ~${ClassName}() = default;",
-			"",
-			"    protected:",
-			"        $1",
-			"",
-			"    private:",
 			"        $2",
-			"}; // <- class ${ClassName}\n"
+			"    #pragma endregion class::enum",
+			"",
+			"    #pragma region class::struct",
+			"    public:",
+			"        $3",
+			"    #pragma endregion class::struct",
+			"",
+			"    #pragma region class::union",
+			"    public:",
+			"        $4",
+			"    #pragma endregion class::union",
+			"",
+			"    #pragma region class::class",
+			"    public:",
+			"        $5",
+			"    #pragma endregion class::class",
+			"",
+			"    #pragma region class::const",
+			"    public:",
+			"        $6",
+			"    #pragma endregion class::const",
+			"",
+			"    #pragma region class::function",
+			"    #pragma region class::function::factory",
+			"    public:",
+			"        $7",
+			"    #pragma endregion class::function::factory",
+			"",
+			"    #pragma region class::function::constructor",
+			"    private:",
+			"        ${1}() = default;",
+			"    #pragma endregion class::function::constructor",
+			"",
+			"    #pragma region class::function::get/set",
+			"    public:",
+			"        $8",
+			"    #pragma endregion class::function::get/set",
+			"",
+			"    #pragma region class::function::destructor",
+			"    private:",
+			"        ~${1}() = default;",
+			"    #pragma endregion class::function::destructor",
+			"",
+			"    #pragma region class::function::interface",
+			"    public:",
+			"        $9",
+			"    #pragma endregion class::function::interface",
+			"",
+			"    #pragma region class::function::inheritance",
+			"    protected:",
+			"        $10",
+			"    #pragma endregion class::function::inheritance",
+			"",
+			"    #pragma region class::function::method",
+			"    private:",
+			"        $11",
+			"    #pragma endregion class::function::method",
+			"    #pragma endregion class::function",
+			"",
+			"    #pragma region class::variable",
+			"    #pragma region class::variable::standard",
+			"    private:",
+			"        $12",
+			"    #pragma endregion class::variable::standard",
+			"",
+			"    #pragma region class::variable::third",
+			"    private:",
+			"        $13",
+			"    #pragma endregion class::variable::third",
+			"",
+			"    #pragma region class::variable::project",
+			"    private:",
+			"        $14",
+			"    #pragma endregion class::variable::project",
+			"    #pragma endregion class::variable",
+			"}; // class ${1}",
+			"#pragma endregion class\n"
 		],
 		"description": "Code snippet for 'class'"
 	},
 	"namespace": {
 		"prefix": "namespace",
 		"body": [
-			"\nnamespace ${NamespaceName} {",
-			"    $1",
-			"} // <- namespace ${NamespaceName}\n"
+			"\n#pragma region namespace",
+			"namespace ${1:NamespaceName} {",
+			"    $2",
+			"} // namespace ${1}",
+			"#pragma endregion namespace\n"
 		],
 		"description": "Code snippet for 'namespace'"
 	},
@@ -111,7 +189,7 @@
 			"    $1",
 			"} catch (const std::exception&) {",
 			"    $2",
-			"} // <- try_catch $3\n"
+			"} // try_catch $3\n"
 		],
 		"description": "Code snippet for try catch"
 	},
@@ -120,7 +198,7 @@
 		"body": [
 			"\nif ($1) {",
 			"    $2",
-			"} // <- if $3\n"
+			"} // if $3\n"
 		],
 		"description": "Code snippet for 'if' statement"
 	},
@@ -129,7 +207,7 @@
 		"body": [
 			"\nelse {",
 			"    $1",
-			"} // <- else $2\n"
+			"} // else $2\n"
 		],
 		"description": "Code snippet for 'else' statement"
 	},
@@ -138,7 +216,7 @@
 		"body": [
 			"\nelse if ($1) {",
 			"    $2",
-			"} // <- elif $3\n"
+			"} // elif $3\n"
 		],
 		"description": "Code snippet for 'elif' statement"
 	},
@@ -152,7 +230,7 @@
 			"    default:",
 			"        $2",
 			"        break;",
-			"} // <- switch $3\n"
+			"} // switch $3\n"
 		],
 		"description": "Code snippet for 'switch' statement"
 	},
@@ -161,7 +239,7 @@
 		"body": [
 			"\nwhile ($1) {",
 			"    $2",
-			"} // <- while $3\n"
+			"} // while $3\n"
 		],
 		"description": "Code snippet for 'while' loop"
 	},
@@ -170,7 +248,7 @@
 		"body": [
 			"\ndo {",
 			"    $1",
-			"} while ($2); // <- do $3\n"
+			"} while ($2); // do $3\n"
 		],
 		"description": "Code snippet for 'do_while' loop"
 	},
@@ -179,7 +257,7 @@
 		"body": [
 			"\nfor (${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++) {",
 			"    $3",
-			"} // <- for $4\n"
+			"} // for $4\n"
 		],
 		"description": "Code snippet for 'for' loop"
 	},
@@ -188,7 +266,7 @@
 		"body": [
 			"\nfor (int ${i} = ${1:length} - 1; ${i} >= ${2:0}; ${i}--) {",
 			"    $3",
-			"} // <- for $4\n"
+			"} // for $4\n"
 		],
 		"description": "Code snippet for reverse 'for' loop"
 	},
@@ -197,120 +275,174 @@
 		"body": [
 			"\nfor(auto ${var} : ${collection_to_loop}) {",
 			"    $1",
-			"} // <- foreach $2\n"
+			"} // foreach $2\n"
 		],
 		"description": "Code snippet for range-based for loop (c++11) statement"
 	},
 	"//guard": {
 		"prefix": "//guard",
 		"body": [
-			"\n// -> guard --------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region guard",
 			"",
-			"// <- guard --------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion guard\n"
 		],
 		"description": "//guard"
 	},
 	"//include": {
 		"prefix": "//include",
 		"body": [
-			"\n// -> include ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> header ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region include",
+			"    #pragma region include::header",
 			"",
-			"// | <- header ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
-			"// | -> standard_C -------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma endregion include::header",
 			"",
-			"// | <- standard_C -------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> standard_C++ ------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"    #pragma region include::standard",
 			"",
-			"// | <- standard_C++ ------------------------------------------------------ 80 || ! ------------------------------ 120 |",
-			"// | -> third ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma endregion include::standard",
 			"",
-			"// | <- third ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> project ----------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma region include::third",
 			"",
-			"// | <- project ----------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// <- include ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"    #pragma endregion include::third",
+			"",
+			"    #pragma region include::project",
+			"",
+			"    #pragma endregion include::project",
+			"#pragma endregion include\n"
 		],
 		"description": "//include"
 	},
 	"//macro": {
 		"prefix": "//macro",
 		"body": [
-			"\n// -> macro --------------------------------------------------------------- 80 || ! ------------------------------- 120 |",
+			"\n#pragma region macro",
 			"",
-			"// <- macro --------------------------------------------------------------- 80 || ! ------------------------------- 120 |\n"
+			"#pragma endregion macro\n"
 		],
 		"description": "//macro"
 	},
 	"//typedef": {
 		"prefix": "//typedef",
 		"body": [
-			"\n// -> typedef ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region typedef",
 			"",
-			"// <- typedef ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion typedef\n"
 		],
 		"description": "//typedef"
 	},
 	"//forward": {
 		"prefix": "//forward",
 		"body": [
-			"\n// -> forward ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region forward",
 			"",
-			"// <- forward ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion forward\n"
 		],
 		"description": "//forward"
 	},
 	"//namespace": {
 		"prefix": "//namespace",
 		"body": [
-			"\n// -> namespace ----------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region namespace",
 			"",
-			"// <- namespace ----------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion namespace\n"
 		],
 		"description": "//namespace"
+	},
+	"//using": {
+		"prefix": "//using",
+		"body": [
+			"\n#pragma region using",
+			"",
+			"#pragma endregion using\n"
+		],
+		"description": "//using"
 	},
 	"//class": {
 		"prefix": "//class",
 		"body": [
-			"\n// -> class --------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region class",
 			"",
-			"// <- class --------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion class\n"
 		],
 		"description": "//class"
 	},
 	"//struct": {
 		"prefix": "//struct",
 		"body": [
-			"\n// -> struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region struct",
 			"",
-			"// <- struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion struct\n"
 		],
 		"description": "//struct"
 	},
 	"//enum": {
 		"prefix": "//enum",
 		"body": [
-			"\n// -> enum ---------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region enum",
 			"",
-			"// <- enum ---------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion enum\n"
 		],
 		"description": "//enum"
+	},
+	"//const": {
+		"prefix": "//const",
+		"body": [
+			"\n#pragma region const",
+			"",
+			"#pragma endregion const\n"
+		],
+		"description": "//const"
 	},
 	"//variable": {
 		"prefix": "//variable",
 		"body": [
-			"\n// -> variable ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region variable",
+			"    #pragma region variable::standard",
 			"",
-			"// <- variable ------------------------------------------------------------ 80 || ! ------------------------------ 120 |\n"
+			"    #pragma endregion variable::standard",
+			"",
+			"    #pragma region variable::third",
+			"",
+			"    #pragma endregion variable::third",
+			"",
+			"    #pragma region variable::project",
+			"",
+			"    #pragma endregion variable::project",
+			"#pragma endregion variable\n"
 		],
 		"description": "//variable"
 	},
 	"//function": {
 		"prefix": "//function",
 		"body": [
-			"\n// -> function ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region function",
+			"    #pragma region function::factory",
 			"",
-			"// <- function ------------------------------------------------------------ 80 || ! ------------------------------ 120 |\n"
+			"    #pragma endregion function::factory",
+			"",
+			"    #pragma region function::constructor",
+			"",
+			"    #pragma endregion function::constructor",
+			"",
+			"    #pragma region function::get/set",
+			"",
+			"    #pragma endregion function::get/set",
+			"",
+			"    #pragma region function::destructor",
+			"",
+			"    #pragma endregion function::destructor",
+			"",
+			"    #pragma region function::interface",
+			"",
+			"    #pragma endregion function::interface",
+			"",
+			"    #pragma region function::inheritance",
+			"",
+			"    #pragma endregion function::inheritance",
+			"",
+			"    #pragma region function::method",
+			"",
+			"    #pragma endregion function::method",
+			"#pragma endregion function\n"
 		],
 		"description": "//function"
 	},

@@ -1,1 +1,6 @@
 *.vsix
+
+vsix
+package-lock.json
+node_modules
+out

@@ -41,27 +41,33 @@
 	"enum": {
 		"prefix": "enum",
 		"body": [
-			"\nenum ${EnumName}Enum {",
-			"    $1",
-			"}; // <- enum ${EnumName}Enum\n"
+			"\n#pragma region enum",
+			"enum ${1:EnumName}Enum {",
+			"    $2",
+			"}; // enum ${1}Enum",
+			"#pragma endregion enum\n"
 		],
 		"description": "Code snippet for 'enum'"
 	},
 	"struct": {
 		"prefix": "struct",
 		"body": [
-			"\nstruct ${StructName} {",
-			"    $1",
-			"}; // <- struct ${StructName}\n"
+			"\n#pragma region struct",
+			"struct ${1:StructName} {",
+			"    $2",
+			"}; // struct ${1}",
+			"#pragma endregion struct\n"
 		],
 		"description": "Code snippet for 'struct'"
 	},
 	"union": {
 		"prefix": "union",
 		"body": [
-			"\nunion ${UnionName} {",
-			"    $1",
-			"}; // <- union ${UnionName}\n"
+			"\n#pragma region union",
+			"union ${1:UnionName} {",
+			"    $2",
+			"}; // union ${1}",
+			"#pragma endregion union\n"
 		],
 		"description": "Code snippet for 'union'"
 	},
@@ -70,7 +76,7 @@
 		"body": [
 			"\nif ($1) {",
 			"    $2",
-			"} // <- if $3\n"
+			"} // if $3\n"
 		],
 		"description": "Code snippet for 'if' statement"
 	},
@@ -79,7 +85,7 @@
 		"body": [
 			"\nelse {",
 			"    $1",
-			"} // <- else $2\n"
+			"} // else $2\n"
 		],
 		"description": "Code snippet for 'else' statement"
 	},
@@ -88,7 +94,7 @@
 		"body": [
 			"\nelse if ($1) {",
 			"    $2",
-			"} // <- elif $3\n"
+			"} // elif $3\n"
 		],
 		"description": "Code snippet for 'elif' statement"
 	},
@@ -102,7 +108,7 @@
 			"    default:",
 			"        $2",
 			"        break;",
-			"} // <- switch $3\n"
+			"} // switch $3\n"
 		],
 		"description": "Code snippet for 'switch' statement"
 	},
@@ -111,7 +117,7 @@
 		"body": [
 			"\nwhile ($1) {",
 			"    $2",
-			"} // <- while $3\n"
+			"} // while $3\n"
 		],
 		"description": "Code snippet for 'while' loop"
 	},
@@ -120,7 +126,7 @@
 		"body": [
 			"\ndo {",
 			"    $1",
-			"} while ($2); // <- do $3\n"
+			"} while ($2); // do $3\n"
 		],
 		"description": "Code snippet for reverse 'do_while' loop"
 	},
@@ -129,7 +135,7 @@
 		"body": [
 			"\nfor (${size_t} ${i} = ${1:0}; ${i} < ${2:length}; ${i}++) {",
 			"    $3",
-			"} // <- for $4\n"
+			"} // for $4\n"
 		],
 		"description": "Code snippet for 'for' loop"
 	},
@@ -138,99 +144,121 @@
 		"body": [
 			"\nfor (int ${i} = ${1:length} - 1; ${i} >= ${2:0}; ${i}--) {",
 			"    $3",
-			"} // <- for $4\n"
+			"} // for $4\n"
 		],
 		"description": "Code snippet for reverse 'for' loop"
 	},
 	"//guard": {
 		"prefix": "//guard",
 		"body": [
-			"\n// -> guard --------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region guard",
 			"",
-			"// <- guard --------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion guard\n"
 		],
 		"description": "//guard"
 	},
 	"//include": {
 		"prefix": "//include",
 		"body": [
-			"\n// -> include ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> header ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region include",
+			"    #pragma region include::header",
 			"",
-			"// | <- header ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
-			"// | -> standard ---------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma endregion include::header",
 			"",
-			"// | <- standard ---------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> third ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma region include::standard",
 			"",
-			"// | <- third ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// | -> project ----------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"    #pragma endregion include::standard",
 			"",
-			"// | <- project ----------------------------------------------------------- 80 || ! ------------------------------ 120 |",
-			"// <- include ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"    #pragma region include::third",
+			"",
+			"    #pragma endregion include::third",
+			"",
+			"    #pragma region include::project",
+			"",
+			"    #pragma endregion include::project",
+			"#pragma endregion include\n"
 		],
 		"description": "//include"
 	},
 	"//macro": {
 		"prefix": "//macro",
 		"body": [
-			"\n// -> macro --------------------------------------------------------------- 80 || ! ------------------------------- 120 |",
+			"\n#pragma region macro",
 			"",
-			"// <- macro --------------------------------------------------------------- 80 || ! ------------------------------- 120 |\n"
+			"#pragma endregion macro\n"
 		],
 		"description": "//macro"
 	},
 	"//typedef": {
 		"prefix": "//typedef",
 		"body": [
-			"\n// -> typedef ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region typedef",
 			"",
-			"// <- typedef ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion typedef\n"
 		],
 		"description": "//typedef"
 	},
 	"//forward": {
 		"prefix": "//forward",
 		"body": [
-			"\n// -> forward ------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region forward",
 			"",
-			"// <- forward ------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion forward\n"
 		],
 		"description": "//forward"
 	},
 	"//struct": {
 		"prefix": "//struct",
 		"body": [
-			"\n// -> struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region struct",
 			"",
-			"// <- struct -------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion struct\n"
 		],
 		"description": "//struct"
 	},
 	"//enum": {
 		"prefix": "//enum",
 		"body": [
-			"\n// -> enum ---------------------------------------------------------------- 80 || ! ------------------------------ 120 |",
+			"\n#pragma region enum",
 			"",
-			"// <- enum ---------------------------------------------------------------- 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion enum\n"
 		],
 		"description": "//enum"
+	},
+	"//const": {
+		"prefix": "//const",
+		"body": [
+			"\n#pragma region const",
+			"",
+			"#pragma endregion const\n"
+		],
+		"description": "//const"
 	},
 	"//variable": {
 		"prefix": "//variable",
 		"body": [
-			"\n// -> variable ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region variable",
+			"    #pragma region variable::standard",
 			"",
-			"// <- variable ------------------------------------------------------------ 80 || ! ------------------------------ 120 |\n"
+			"    #pragma endregion variable::standard",
+			"",
+			"    #pragma region variable::third",
+			"",
+			"    #pragma endregion variable::third",
+			"",
+			"    #pragma region variable::project",
+			"",
+			"    #pragma endregion variable::project",
+			"#pragma endregion variable\n"
 		],
 		"description": "//variable"
 	},
 	"//function": {
 		"prefix": "//function",
 		"body": [
-			"\n// -> function ------------------------------------------------------------ 80 || ! ------------------------------ 120 |",
+			"\n#pragma region function",
 			"",
-			"// <- function ------------------------------------------------------------ 80 || ! ------------------------------ 120 |\n"
+			"#pragma endregion function\n"
 		],
 		"description": "//function"
 	},
