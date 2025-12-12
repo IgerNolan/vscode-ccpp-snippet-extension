@@ -1,1 +1,1 @@
-npm install && vsce package && cls || (pause & cls)
+vsce package && cls || (pause & cls)
